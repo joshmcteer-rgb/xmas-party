@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <title>You’re invited: Christmas Party</title>
+<meta name="description" content="You’re invited to the McTeers’ Christmas party! Thursday, December 10 at 5:00 PM. Please, no veggie trays.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="You’re invited to the McTeers’ Christmas party!">
+<meta property="og:description" content="Thursday, December 10 at 5:00 PM. Sweaters optional. Appetite mandatory. RSVP inside.">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Young+Serif&display=swap" rel="stylesheet">
 <style>
@@ -95,6 +100,13 @@ legend{font-weight:500;font-size:.96rem;padding:0;margin-bottom:8px}
 .lookup{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
 .lookup input{flex:1;min-width:200px}
 footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
+
+/* share */
+a.btn{display:inline-flex;align-items:center;text-decoration:none}
+.share{text-align:center;padding:10px 0 0}
+.share .lead{margin-left:auto;margin-right:auto}
+.sharebtns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:18px 0 8px}
+.small{font-size:.9rem}
 
 @media (max-width:760px){
   .hero{padding:40px 18px 72px}
@@ -205,6 +217,22 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
       </div>
     </div>
   </section>
+
+  <section>
+    <div class="share">
+      <h2>Spread the word</h2>
+      <p class="lead">Know someone who’d love this? Pass it on. (Just not the veggie trays.)</p>
+      <div class="sharebtns">
+        <button type="button" class="btn hidden" id="shNative">Share…</button>
+        <a class="btn ghost" id="shSms" href="#">Text</a>
+        <a class="btn ghost" id="shMail" href="#">Email</a>
+        <a class="btn ghost" id="shFb" href="#" target="_blank" rel="noopener">Facebook</a>
+        <button type="button" class="btn ghost" id="shCopy">Copy link</button>
+      </div>
+      <p class="lead small" id="shMsg" role="status" aria-live="polite"></p>
+      <p class="lead small">Instagram doesn’t let websites post for you. On your phone, tap “Share…” and pick Instagram, or copy the link and paste it into a story or message.</p>
+    </div>
+  </section>
 </main>
 
 <footer>Can’t wait to see you. Come hungry!</footer>
@@ -252,6 +280,31 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
       btn.disabled=false; btn.textContent='Send my RSVP';
       say('err','Couldn’t send that. Check your connection and try again.');
     });
+  });
+
+  // ----- share -----
+  var shareUrl = location.href.split('#')[0];
+  var shareText = 'You’re invited to the McTeers’ Christmas party! Thursday, December 10 at 5:00 PM. RSVP here:';
+  var enc = encodeURIComponent;
+  $('shSms').href = 'sms:?&body=' + enc(shareText + ' ' + shareUrl);
+  $('shMail').href = 'mailto:?subject=' + enc('You’re invited: McTeers’ Christmas Party') + '&body=' + enc(shareText + '\n\n' + shareUrl);
+  $('shFb').href = 'https://www.facebook.com/sharer/sharer.php?u=' + enc(shareUrl);
+  if (navigator.share) {
+    show($('shNative'), true);
+    $('shNative').addEventListener('click', function(){
+      navigator.share({ title: 'McTeers’ Christmas Party', text: shareText, url: shareUrl }).catch(function(){});
+    });
+  }
+  $('shCopy').addEventListener('click', function(){
+    var done = function(){ $('shMsg').textContent = 'Link copied! Paste it anywhere.'; };
+    var fallback = function(){
+      var t = document.createElement('textarea'); t.value = shareUrl; t.style.position = 'fixed'; t.style.opacity = '0';
+      document.body.appendChild(t); t.select();
+      try { document.execCommand('copy'); done(); } catch(e) { $('shMsg').textContent = 'Copy this link: ' + shareUrl; }
+      document.body.removeChild(t);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(shareUrl).then(done, fallback);
+    else fallback();
   });
 
   $('lookupBtn').addEventListener('click',function(){
