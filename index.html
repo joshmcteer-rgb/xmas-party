@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <title>You’re invited: Christmas Party</title>
-<meta name="description" content="You’re invited to the McTeers’ Christmas party! Thursday, December 10 at 5:00 PM. Please, no veggie trays.">
+<meta name="description" content="You’re invited to the McTeers’ Christmas party! Thursday, December 10 at 5:00 PM. Please RSVP.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="You’re invited to the McTeers’ Christmas party!">
-<meta property="og:description" content="Thursday, December 10 at 5:00 PM. Sweaters optional. Appetite mandatory. RSVP inside.">
+<meta property="og:description" content="Thursday, December 10 at 5:00 PM. Sweaters optional. RSVP inside.">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Young+Serif&display=swap" rel="stylesheet">
@@ -62,12 +62,6 @@ h2{font-size:clamp(1.8rem,5vw,2.4rem);line-height:1.1;margin-bottom:12px}
 .lead{color:var(--muted);max-width:60ch;margin:0 0 6px}
 .lead b{color:var(--ink)}
 
-.covered{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
-.cov{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:22px 18px 20px;position:relative;overflow:hidden}
-.cov .emoji{font-size:2.2rem;line-height:1}
-.cov h3{font-size:1.3rem;margin:10px 0 6px}
-.cov p{margin:0;color:var(--muted);font-size:.98rem}
-.stamp{position:absolute;top:14px;right:-6px;transform:rotate(9deg);border:2.5px solid var(--berry);color:var(--berry);border-radius:8px;padding:2px 10px;font-weight:700;font-size:.95rem;background:var(--card);letter-spacing:.02em}
 
 /* rsvp */
 .rsvp{background:var(--card);border:1.5px dashed var(--berry);border-radius:22px;padding:30px 22px}
@@ -109,15 +103,9 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
   .hero{padding:40px 18px 72px}
   .hero-grid{grid-template-columns:1fr}
   .details{transform:none}
-  .covered{grid-template-columns:1fr}
-  .stamp{right:14px}
   .rsvp{padding:24px 16px}
 }
 @media (prefers-reduced-motion:no-preference){
-  .stamp{animation:thunk .5s cubic-bezier(.2,1.4,.4,1) both;animation-delay:.3s}
-  .cov:nth-child(2) .stamp{animation-delay:.5s}
-  .cov:nth-child(3) .stamp{animation-delay:.7s}
-  @keyframes thunk{from{transform:rotate(9deg) scale(2.2);opacity:0}to{transform:rotate(9deg) scale(1);opacity:1}}
 }
 </style>
 </head>
@@ -127,7 +115,7 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
   <div class="wrap hero-grid">
     <div>
       <h1>You’re invited to our Christmas party!</h1>
-      <p class="sub">Sweaters optional. Appetite mandatory.</p>
+      <p class="sub">Sweaters optional. Good company required.</p>
     </div>
     <aside class="details" aria-label="Party details">
       <div class="who">Hosted by The McTeers</div>
@@ -142,35 +130,9 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
 
 <main>
   <section>
-    <h2>Okay, let’s talk about the food.</h2>
-    <p class="lead">Last year, a lot of you brought veggie trays. <b>A lot.</b> Our fridge looked like a salad bar threw a family reunion, and we’re still finding celery. We love you, but this year we’re getting ahead of it.</p>
-
-    <div class="covered">
-      <article class="cov">
-        <span class="stamp">COVERED</span>
-        <div class="emoji" aria-hidden="true">🍰</div>
-        <h3>Desserts</h3>
-        <p>We’ve got the sweet stuff handled. Our sweet tooth was consulted.</p>
-      </article>
-      <article class="cov">
-        <span class="stamp">COVERED</span>
-        <div class="emoji" aria-hidden="true">🥕</div>
-        <h3>Veggie trays</h3>
-        <p>Please, no more. We have learned our lesson. We are fluent in ranch.</p>
-      </article>
-      <article class="cov">
-        <span class="stamp">COVERED</span>
-        <div class="emoji" aria-hidden="true">🧀</div>
-        <h3>Meat &amp; cheese boards</h3>
-        <p>We’re on it. There will be cheese. So much cheese.</p>
-      </article>
-    </div>
-  </section>
-
-  <section>
     <div class="rsvp" id="rsvp">
       <h2>So, are you in?</h2>
-      <p class="lead">Let us know you’re coming so we know how much cheese to buy. (The answer is still “so much.”) Already know what you’re bringing? There’s a spot to tell us. Totally optional, and showing up is plenty.</p>
+      <p class="lead">Let us know if you’re coming so we know how many to expect.</p>
 
       <div id="msg" class="msg hidden" role="status" aria-live="polite"></div>
 
@@ -195,9 +157,6 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
           <input type="number" id="people" min="1" max="20" value="1" inputmode="numeric">
         </label>
 
-        <label class="f hidden" id="bringWrap">Already know what you’re bringing? <small>Totally optional.</small>
-          <input type="text" id="bringing" maxlength="100">
-        </label>
 
         <div class="hp" aria-hidden="true"><label>Website <input type="text" id="website" tabindex="-1" autocomplete="off"></label></div>
 
@@ -223,7 +182,7 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
   </section>
 </main>
 
-<footer>Can’t wait to see you. Come hungry!</footer>
+<footer>Can’t wait to see you!</footer>
 
 <script>
 (function(){
@@ -239,7 +198,6 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
   function sync(){
     var a=attending();
     show($('peopleWrap'),a==='yes'||a==='maybe');
-    show($('bringWrap'),a==='yes'||a==='maybe');
   }
   document.addEventListener('change',function(e){ if(e.target.name==='attending') sync(); });
 
@@ -251,7 +209,7 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
   $('form').addEventListener('submit',function(e){
     e.preventDefault();
     var p={ name:$('name').value, email:$('email').value, attending:attending(),
-            people:$('people').value, bringing:$('bringing').value, website:$('website').value };
+            people:$('people').value, website:$('website').value };
     if(p.name.trim().length<2) return say('err','Please add your name.');
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(p.email.trim())) return say('err','Please add a valid email.');
     if(!p.attending) return say('err','Please choose whether you’re coming.');
@@ -300,7 +258,7 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
       $('name').value=r.name; $('email').value=r.email;
       var val=r.attending==='Yes'?'yes':r.attending==='Maybe'?'maybe':'no';
       document.querySelector('input[name=attending][value='+val+']').checked=true;
-      $('people').value=r.people||1; $('bringing').value=r.bringing||'';
+      $('people').value=r.people||1;
       sync();
       say('ok', res.closed ? 'Found it, but RSVPs are closed now. Message the hosts to make changes.' : 'Found it! Change anything above and press “Send my RSVP”.');
       $('form').scrollIntoView({behavior:'smooth',block:'start'});
