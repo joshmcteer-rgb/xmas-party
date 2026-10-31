@@ -1,3 +1,7 @@
+Claude
+
+
+Index · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +9,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <title>You’re invited: Christmas Party</title>
-<meta name="description" content="You’re invited to the McTeers’ Christmas party! Thursday, December 10 at 5:00 PM. Please RSVP.">
+<meta name="description" content="You’re invited to the McTeers’ Christmas party! Thursday, December 10 at 4:00 PM. Please RSVP.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="You’re invited to the McTeers’ Christmas party!">
-<meta property="og:description" content="Thursday, December 10 at 5:00 PM. Sweaters optional. RSVP inside.">
+<meta property="og:description" content="Thursday, December 10 at 4:00 PM. Sweaters optional. RSVP inside.">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Young+Serif&display=swap" rel="stylesheet">
@@ -36,7 +40,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',system
 h1,h2,h3{font-family:'Young Serif',Georgia,'Times New Roman',serif;font-weight:400;margin:0}
 button,input,textarea{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-
+ 
 .hero{background:var(--pine);color:#fff;padding:56px 20px 84px;position:relative;overflow:hidden}
 .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
   background-image:
@@ -55,14 +59,26 @@ button,input,textarea{font:inherit;color:inherit}
 .details dl{margin:12px 0 0;display:grid;gap:12px}
 .details dt{font-size:.85rem;color:#566660}
 .details dd{margin:0;font-weight:700}
-
+ 
 main{max-width:900px;margin:0 auto;padding:0 16px 56px}
 section{margin-top:44px}
 h2{font-size:clamp(1.8rem,5vw,2.4rem);line-height:1.1;margin-bottom:12px}
 .lead{color:var(--muted);max-width:60ch;margin:0 0 6px}
 .lead b{color:var(--ink)}
-
-
+ 
+ 
+/* food */
+.foodgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.cov{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:22px 18px 20px;position:relative;overflow:hidden}
+.cov .emoji{font-size:2.2rem;line-height:1}
+.cov h3{font-size:1.3rem;margin:10px 0 6px}
+.cov p{margin:0;color:var(--muted);font-size:.98rem}
+.stamp{position:absolute;top:14px;right:-6px;transform:rotate(9deg);border:2.5px solid var(--berry);color:var(--berry);border-radius:8px;padding:2px 10px;font-weight:700;font-size:.95rem;background:var(--card);letter-spacing:.02em}
+.welcome{grid-column:1 / -1;background:var(--pine);color:#fff;border:0;padding:28px 22px}
+.welcome h3{font-size:1.6rem}
+.welcome p{color:#cfe0d6;font-size:1.02rem;max-width:56ch}
+.rule{display:inline-block;margin-top:14px;background:var(--gold);color:#1d2622;border-radius:999px;padding:7px 16px;font-weight:700}
+ 
 /* rsvp */
 .rsvp{background:var(--card);border:1.5px dashed var(--berry);border-radius:22px;padding:30px 22px}
 .rsvp > p.lead{margin-bottom:20px}
@@ -94,23 +110,24 @@ legend{font-weight:500;font-size:.96rem;padding:0;margin-bottom:8px}
 .lookup{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
 .lookup input{flex:1;min-width:200px}
 footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
-
-/* share */
-.share{text-align:center}
-.small{font-size:.9rem;margin-top:10px}
-
+ 
 @media (max-width:760px){
   .hero{padding:40px 18px 72px}
   .hero-grid{grid-template-columns:1fr}
   .details{transform:none}
+  .foodgrid{grid-template-columns:1fr}
+  .stamp{right:14px}
   .rsvp{padding:24px 16px}
 }
 @media (prefers-reduced-motion:no-preference){
+  .stamp{animation:thunk .5s cubic-bezier(.2,1.4,.4,1) both;animation-delay:.3s}
+  .cov:nth-child(2) .stamp{animation-delay:.5s}
+  @keyframes thunk{from{transform:rotate(9deg) scale(2.2);opacity:0}to{transform:rotate(9deg) scale(1);opacity:1}}
 }
 </style>
 </head>
 <body>
-
+ 
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
@@ -120,22 +137,46 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
     <aside class="details" aria-label="Party details">
       <div class="who">Hosted by The McTeers</div>
       <dl>
-        <div><dt>When</dt><dd>Thursday, December 10 at 5:00 PM</dd></div>
+        <div><dt>When</dt><dd>Thursday, December 10 at 4:00 PM</dd></div>
         <div><dt>Where</dt><dd>65 Oak St, Grand Bend, ON N0M 1T0</dd></div>
-        <div><dt>RSVP by</dt><dd>December 3</dd></div>
       </dl>
     </aside>
   </div>
 </header>
-
+ 
 <main>
+  <section>
+    <h2>A quick word about food.</h2>
+ 
+    <div class="foodgrid">
+      <article class="cov">
+        <span class="stamp">ALL SET</span>
+        <div class="emoji" aria-hidden="true">🥕</div>
+        <h3>Veggie trays</h3>
+        <p>We’re good, thank you! We are fluent in ranch.</p>
+      </article>
+      <article class="cov">
+        <span class="stamp">ALL SET</span>
+        <div class="emoji" aria-hidden="true">🧀</div>
+        <h3>Charcuterie boards</h3>
+        <p>Also taken care of. There will be cheese. So much cheese.</p>
+      </article>
+      <article class="cov welcome">
+        <div class="emoji" aria-hidden="true">🙌</div>
+        <h3>Appetizers are welcome!</h3>
+        <p>Bring something to share if you’d like. Totally optional, but we’ll never say no to a good appetizer. Think bite-sized, hand-held, and napkin-friendly.</p>
+        <span class="rule">One rule: nothing that needs cutlery</span>
+      </article>
+    </div>
+  </section>
+ 
   <section>
     <div class="rsvp" id="rsvp">
       <h2>So, are you in?</h2>
-      <p class="lead">Let us know if you’re coming so we know how many to expect.</p>
-
+      <p class="lead">Let us know if you’re coming so we know how many to expect. Family members are welcome too! Just include everyone in your headcount.</p>
+ 
       <div id="msg" class="msg hidden" role="status" aria-live="polite"></div>
-
+ 
       <form id="form" novalidate>
         <label class="f">Your name
           <input type="text" id="name" autocomplete="name" maxlength="80" required>
@@ -143,7 +184,7 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
         <label class="f">Email <small>Only used so you can find and change your RSVP later. Never shown to anyone.</small>
           <input type="email" id="email" autocomplete="email" maxlength="120" required>
         </label>
-
+ 
         <fieldset>
           <legend>Are you coming?</legend>
           <div class="choices">
@@ -152,17 +193,17 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
             <label class="choice"><input type="radio" name="attending" value="no"><span>Can’t make it</span></label>
           </div>
         </fieldset>
-
+ 
         <label class="f hidden" id="peopleWrap">How many people total, including you?
           <input type="number" id="people" min="1" max="20" value="1" inputmode="numeric">
         </label>
-
-
+ 
+ 
         <div class="hp" aria-hidden="true"><label>Website <input type="text" id="website" tabindex="-1" autocomplete="off"></label></div>
-
+ 
         <div><button type="submit" class="btn" id="save">Send my RSVP</button></div>
       </form>
-
+ 
       <div class="change">
         <h3>Need to change your answer?</h3>
         <p class="lead" style="margin:0">Enter the email you used and we’ll load your RSVP so you can update it.</p>
@@ -173,22 +214,16 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
       </div>
     </div>
   </section>
-
-  <section>
-    <div class="share">
-      <button type="button" class="btn" id="shBtn">Share this invite</button>
-      <p class="lead small" id="shMsg" role="status" aria-live="polite"></p>
-    </div>
-  </section>
+ 
 </main>
-
+ 
 <footer>Can’t wait to see you!</footer>
-
+ 
 <script>
 (function(){
   // Paste your Google Apps Script web app URL between the quotes (ends in /exec).
   var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxkLvc2-CJCiQ12Yy_aloO3ltFCRi34iVeFZ3M05zQ1ih5RkWaUrOFD8AOtMkIRQjKK/exec';
-
+ 
   var $ = function(id){ return document.getElementById(id); };
   function show(el,on){ el.classList.toggle('hidden',!on); }
   function say(kind,text){
@@ -200,12 +235,12 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
     show($('peopleWrap'),a==='yes'||a==='maybe');
   }
   document.addEventListener('change',function(e){ if(e.target.name==='attending') sync(); });
-
+ 
   function post(payload){
     return fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)})
       .then(function(r){ return r.json(); });
   }
-
+ 
   $('form').addEventListener('submit',function(e){
     e.preventDefault();
     var p={ name:$('name').value, email:$('email').value, attending:attending(),
@@ -227,27 +262,7 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
       say('err','Couldn’t send that. Check your connection and try again.');
     });
   });
-
-  // ----- share -----
-  var shareUrl = location.href.split('#')[0];
-  var shareText = 'You’re invited to the McTeers’ Christmas party! Thursday, December 10 at 5:00 PM. RSVP here:';
-  function copyLink(){
-    var done = function(){ $('shMsg').textContent = 'Link copied! Paste it anywhere.'; };
-    var fallback = function(){
-      var t = document.createElement('textarea'); t.value = shareUrl; t.style.position = 'fixed'; t.style.opacity = '0';
-      document.body.appendChild(t); t.select();
-      try { document.execCommand('copy'); done(); } catch(e) { $('shMsg').textContent = 'Copy this link: ' + shareUrl; }
-      document.body.removeChild(t);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(shareUrl).then(done, fallback);
-    else fallback();
-  }
-  $('shBtn').addEventListener('click', function(){
-    if (navigator.share) {
-      navigator.share({ title: 'McTeers’ Christmas Party', text: shareText, url: shareUrl }).catch(function(){});
-    } else copyLink();
-  });
-
+ 
   $('lookupBtn').addEventListener('click',function(){
     var em=$('lookupEmail').value.trim();
     if(!em) return say('err','Enter the email you used to RSVP.');
@@ -268,3 +283,6 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
 </script>
 </body>
 </html>
+ 
+Claude finished the response
+Extension Icon
