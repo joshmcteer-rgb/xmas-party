@@ -36,7 +36,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',system
 h1,h2,h3{font-family:'Young Serif',Georgia,'Times New Roman',serif;font-weight:400;margin:0}
 button,input,textarea{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
- 
+
 .hero{background:var(--pine);color:#fff;padding:56px 20px 84px;position:relative;overflow:hidden}
 .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
   background-image:
@@ -55,14 +55,14 @@ button,input,textarea{font:inherit;color:inherit}
 .details dl{margin:12px 0 0;display:grid;gap:12px}
 .details dt{font-size:.85rem;color:#566660}
 .details dd{margin:0;font-weight:700}
- 
+
 main{max-width:900px;margin:0 auto;padding:0 16px 56px}
 section{margin-top:44px}
 h2{font-size:clamp(1.8rem,5vw,2.4rem);line-height:1.1;margin-bottom:12px}
 .lead{color:var(--muted);max-width:60ch;margin:0 0 6px}
 .lead b{color:var(--ink)}
- 
- 
+
+
 /* food */
 .foodgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
 .cov{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:22px 18px 20px;position:relative;overflow:hidden}
@@ -74,7 +74,7 @@ h2{font-size:clamp(1.8rem,5vw,2.4rem);line-height:1.1;margin-bottom:12px}
 .welcome h3{font-size:1.6rem}
 .welcome p{color:#cfe0d6;font-size:1.02rem;max-width:56ch}
 .rule{display:inline-block;margin-top:14px;background:var(--gold);color:#1d2622;border-radius:999px;padding:7px 16px;font-weight:700}
- 
+
 /* rsvp */
 .rsvp{background:var(--card);border:1.5px dashed var(--berry);border-radius:22px;padding:30px 22px}
 .rsvp > p.lead{margin-bottom:20px}
@@ -106,7 +106,17 @@ legend{font-weight:500;font-size:.96rem;padding:0;margin-bottom:8px}
 .lookup{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
 .lookup input{flex:1;min-width:200px}
 footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
- 
+
+/* calendar popup */
+dialog{border:0;border-radius:20px;padding:26px 22px;width:min(92vw,420px);background:var(--card);color:var(--ink);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(8,20,15,.6)}
+dialog h3{font-size:1.6rem;margin-bottom:6px}
+dialog p{margin:0 0 16px;color:var(--muted)}
+.calopts{display:grid;gap:10px}
+.calopts .btn{width:100%;display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none}
+.calclose{margin-top:12px;width:100%}
+#calBtnWrap{margin-bottom:16px}
+
 @media (max-width:760px){
   .hero{padding:40px 18px 72px}
   .hero-grid{grid-template-columns:1fr}
@@ -123,7 +133,7 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
 </style>
 </head>
 <body>
- 
+
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
@@ -139,11 +149,11 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
     </aside>
   </div>
 </header>
- 
+
 <main>
   <section>
     <h2>A quick word about food.</h2>
- 
+
     <div class="foodgrid">
       <article class="cov">
         <span class="stamp">ALL SET</span>
@@ -165,14 +175,15 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
       </article>
     </div>
   </section>
- 
+
   <section>
     <div class="rsvp" id="rsvp">
       <h2>So, are you in?</h2>
       <p class="lead">Let us know if you’re coming so we know how many to expect. Family members are welcome too! Just include everyone in your headcount.</p>
- 
+
       <div id="msg" class="msg hidden" role="status" aria-live="polite"></div>
- 
+      <div id="calBtnWrap" class="hidden"><button type="button" class="btn ghost" id="calBtn">Add to my calendar</button></div>
+
       <form id="form" novalidate>
         <label class="f">Your name
           <input type="text" id="name" autocomplete="name" maxlength="80" required>
@@ -180,7 +191,7 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
         <label class="f">Email <small>Only used so you can find and change your RSVP later. Never shown to anyone.</small>
           <input type="email" id="email" autocomplete="email" maxlength="120" required>
         </label>
- 
+
         <fieldset>
           <legend>Are you coming?</legend>
           <div class="choices">
@@ -189,17 +200,17 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
             <label class="choice"><input type="radio" name="attending" value="no"><span>Can’t make it</span></label>
           </div>
         </fieldset>
- 
+
         <label class="f hidden" id="peopleWrap">How many people total, including you?
           <input type="number" id="people" min="1" max="20" value="1" inputmode="numeric">
         </label>
- 
- 
+
+
         <div class="hp" aria-hidden="true"><label>Website <input type="text" id="website" tabindex="-1" autocomplete="off"></label></div>
- 
+
         <div><button type="submit" class="btn" id="save">Send my RSVP</button></div>
       </form>
- 
+
       <div class="change">
         <h3>Need to change your answer?</h3>
         <p class="lead" style="margin:0">Enter the email you used and we’ll load your RSVP so you can update it.</p>
@@ -210,16 +221,27 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
       </div>
     </div>
   </section>
- 
+
 </main>
- 
+
 <footer>Can’t wait to see you!</footer>
- 
+
+<dialog id="calDlg" aria-labelledby="calTitle">
+  <h3 id="calTitle">You’re on the list!</h3>
+  <p id="calText">Add the party to your calendar so you don’t forget.</p>
+  <div class="calopts">
+    <a class="btn" id="calGoogle" href="#" target="_blank" rel="noopener">Google Calendar</a>
+    <a class="btn" id="calOutlook" href="#" target="_blank" rel="noopener">Outlook</a>
+    <button type="button" class="btn" id="calIcs">Apple Calendar or other (.ics file)</button>
+  </div>
+  <button type="button" class="btn ghost calclose" id="calClose">Close</button>
+</dialog>
+
 <script>
 (function(){
   // Paste your Google Apps Script web app URL between the quotes (ends in /exec).
   var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxkLvc2-CJCiQ12Yy_aloO3ltFCRi34iVeFZ3M05zQ1ih5RkWaUrOFD8AOtMkIRQjKK/exec';
- 
+
   var $ = function(id){ return document.getElementById(id); };
   function show(el,on){ el.classList.toggle('hidden',!on); }
   function say(kind,text){
@@ -231,12 +253,12 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
     show($('peopleWrap'),a==='yes'||a==='maybe');
   }
   document.addEventListener('change',function(e){ if(e.target.name==='attending') sync(); });
- 
+
   function post(payload){
     return fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)})
       .then(function(r){ return r.json(); });
   }
- 
+
   $('form').addEventListener('submit',function(e){
     e.preventDefault();
     var p={ name:$('name').value, email:$('email').value, attending:attending(),
@@ -249,16 +271,55 @@ footer{text-align:center;color:var(--muted);padding:8px 16px 44px}
     post(p).then(function(res){
       btn.disabled=false; btn.textContent='Send my RSVP';
       if(res&&res.ok){
-        say('ok', p.attending==='yes' ? 'You’re in! We can’t wait to see you. Need to change anything? Just use “Find my RSVP” below.'
+        var m = p.attending==='yes' ? 'You’re in! We can’t wait to see you. Need to change anything? Just use “Find my RSVP” below.'
                 : p.attending==='maybe' ? 'Got it, you’re a maybe. Update us whenever you know.'
-                : 'Thanks for letting us know. We’ll miss you!');
+                : 'Thanks for letting us know. We’ll miss you!';
+        say('ok', m);
+        if(p.attending!=='no'){ show($('calBtnWrap'),true); openCal(p.attending); } else show($('calBtnWrap'),false);
       } else say('err',(res&&res.message)||'Something went wrong. Please try again.');
     }).catch(function(){
       btn.disabled=false; btn.textContent='Send my RSVP';
       say('err','Couldn’t send that. Check your connection and try again.');
     });
   });
- 
+
+  // ----- add to calendar -----
+  // Party details for calendar entries (times are UTC; 4:00 PM EST = 21:00Z). End time is an assumption (8:00 PM).
+  var EVENT = {
+    title: 'McTeers’ Christmas Party',
+    start: '20261210T210000Z', end: '20261211T010000Z',
+    startIso: '2026-12-10T21:00:00Z', endIso: '2026-12-11T01:00:00Z',
+    location: '65 Oak St, Grand Bend, ON N0M 1T0',
+    details: 'Hosted by The McTeers. You can change your RSVP any time before the party.'
+  };
+  var enc = encodeURIComponent;
+  function icsText(t){ return String(t).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n'); }
+  function buildIcs(){
+    var stamp = new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+    return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//McTeers//Christmas Party//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH',
+      'BEGIN:VEVENT','UID:mcteers-christmas-2026@mcteers.invite','DTSTAMP:'+stamp,
+      'DTSTART:'+EVENT.start,'DTEND:'+EVENT.end,'SUMMARY:'+icsText(EVENT.title),
+      'LOCATION:'+icsText(EVENT.location),'DESCRIPTION:'+icsText(EVENT.details),'STATUS:CONFIRMED','END:VEVENT','END:VCALENDAR'].join('\r\n')+'\r\n';
+  }
+  function openCal(status){
+    var maybe = status==='maybe';
+    $('calTitle').textContent = maybe ? 'Thanks, we’ll pencil you in!' : 'You’re on the list!';
+    $('calText').textContent = maybe ? 'Add the party to your calendar as a placeholder.' : 'Add the party to your calendar so you don’t forget.';
+    $('calGoogle').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+enc(EVENT.title)+'&dates='+EVENT.start+'/'+EVENT.end+'&location='+enc(EVENT.location)+'&details='+enc(EVENT.details);
+    $('calOutlook').href = 'https://outlook.live.com/calendar/0/deeplink/compose?path='+enc('/calendar/action/compose')+'&rru=addevent&subject='+enc(EVENT.title)+'&startdt='+enc(EVENT.startIso)+'&enddt='+enc(EVENT.endIso)+'&location='+enc(EVENT.location)+'&body='+enc(EVENT.details);
+    var d = $('calDlg');
+    if (d.showModal) { if(!d.open) d.showModal(); } else d.setAttribute('open','');
+  }
+  $('calBtn').addEventListener('click', function(){ openCal(attending()); });
+  $('calClose').addEventListener('click', function(){ var d=$('calDlg'); if(d.close) d.close(); else d.removeAttribute('open'); });
+  $('calIcs').addEventListener('click', function(){
+    var blob = new Blob([buildIcs()], {type:'text/calendar;charset=utf-8'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a'); a.href = url; a.download = 'christmas-party.ics';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+  });
+
   $('lookupBtn').addEventListener('click',function(){
     var em=$('lookupEmail').value.trim();
     if(!em) return say('err','Enter the email you used to RSVP.');
